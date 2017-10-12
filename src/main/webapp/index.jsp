@@ -30,6 +30,6 @@ if ('https:' === document.location.protocol) {
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World Test1!</h1>
+        <h1>Welcome to OpenShift </h1>
     </body>
 </html>
