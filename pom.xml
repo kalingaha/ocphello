@@ -33,6 +33,43 @@
                         <target>1.6</target>
                     </configuration>
       </plugin>
+	  <plugin>
+    <groupId>org.jboss.as.plugins</groupId>
+    <artifactId>jboss-as-maven-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>deploy-driver</id>
+            <phase>package</phase>
+            <configuration>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <name>postgresql.jar</name>
+            </configuration>
+            <goals>
+                <goal>deploy-artifact</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>add-datasource</id>
+            <phase>install</phase>
+            <configuration>
+                <address>subsystem=datasources,data-source=myDatasource</address>
+                <properties>
+                    <connection-url>jdbc:postgresql://localhost/myDatabase</connection-url>
+                    <jndi-name>myDatasource</jndi-name>
+                    <enabled>true</enabled>
+                    <pool-name>myPool</pool-name>
+                    <user-name>dmusername</user-name>
+                    <password>secret</password>
+                    <driver-name>postgresql.jar</driver-name>
+                </properties>
+            </configuration>
+            <goals>
+                <goal>add-resource</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
     </plugins>
   </build>
 </project>
